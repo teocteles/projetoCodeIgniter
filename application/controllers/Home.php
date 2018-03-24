@@ -54,16 +54,17 @@ class Home extends CI_Controller {
 			$dataFin = explode('-',$dtFin);
 			$periodo_final = '\''.$dataFin[0].'-'.$dataFin[1].'-'.$dataFin[2].'\'';
 
-			
+			$sql = "
+			SELECT a.codigo codigo_agendamento, a.data_agendamento data_agendamento, m.nome nome_medico, p.nome nome_paciente FROM agendamento a
+			inner join medico m
+			on  a.codigo_medico = m.codigo
+			inner join paciente p
+			on a.codigo_paciente = p.codigo
 
-			$this->db->select('a.codigo codigo_agendamento, a.data_agendamento data_agendamento, m.nome nome_medico, p.nome nome_paciente');
-			$this->db->from('agendamento a');
-			$this->db->join('medico m', 'a.codigo_medico = m.codigo');
-			$this->db->join('paciente p', 'a.codigo_paciente = p.codigo');
-			$this->db->where('a.data_agendamento >= ', $periodo_inicio);
-			$this->db->or_where('a.data_agendamento <= ', $periodo_final);
+			where a.data_agendamento >= ".$periodo_inicio." 
+			AND a.data_agendamento <= ".$periodo_final;
 			
-			$variaveis['agendamentos'] = $this->db->get();
+			$variaveis['agendamentos'] = $this->db->query($sql);
 			$this->load->view('v_home', $variaveis);
 
 		}
