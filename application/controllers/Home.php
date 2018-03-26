@@ -61,8 +61,8 @@ class Home extends CI_Controller {
 			inner join paciente p
 			on a.codigo_paciente = p.codigo
 
-			where a.data_agendamento >= ".$periodo_inicio." 
-			AND a.data_agendamento <= ".$periodo_final;
+			where DATE(a.data_agendamento) >= ".$periodo_inicio." 
+			AND DATE(a.data_agendamento) <= ".$periodo_final;
 			
 			$variaveis['agendamentos'] = $this->db->query($sql);
 			$this->load->view('v_home', $variaveis);
