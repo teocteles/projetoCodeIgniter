@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 	<div class="container">
-		<h1 class="text-center">Entrevista - Teógenes Teles</h1>
+		<h1 class="text-center">Sistema de Consulta</h1>
 		<div class="col-md-12">
 			<div class="row">
 				<?= anchor('CadastroMedico/create', 'Novo Médico', array('class' => 'btn btn-success')); ?>
